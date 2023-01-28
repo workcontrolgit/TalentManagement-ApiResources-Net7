@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{32DF4157-BB16-473B-9DA7-3DFC4A4F0E3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentManagementAPI.WebApi", "TalentManagementAPI\TalentManagementAPI.WebApi\TalentManagementAPI.WebApi.csproj", "{8CFCABBC-D131-4E64-B350-E3C4404867AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F72F8AE0-1E03-4458-9879-4A29DD91EC43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentManagementAPI.Application", "TalentManagementAPI\TalentManagementAPI.Application\TalentManagementAPI.Application.csproj", "{2CF985B4-5D94-4405-B946-24E45E0B79DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentManagementAPI.Domain", "TalentManagementAPI\TalentManagementAPI.Domain\TalentManagementAPI.Domain.csproj", "{C2423C4F-1BEF-411C-BCDF-370AE4777CE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{8D90AA1A-231B-4A30-ABEF-C1D031A7F5A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentManagementAPI.Infrastructure.Persistence", "TalentManagementAPI\TalentManagementAPI.Infrastructure.Persistence\TalentManagementAPI.Infrastructure.Persistence.csproj", "{564EE677-77BA-4921-89B2-F873FAC22C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentManagementAPI.Infrastructure.Shared", "TalentManagementAPI\TalentManagementAPI.Infrastructure.Shared\TalentManagementAPI.Infrastructure.Shared.csproj", "{1B33FC9E-17D9-4104-AEEC-A402D6D5874C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CFCABBC-D131-4E64-B350-E3C4404867AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFCABBC-D131-4E64-B350-E3C4404867AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFCABBC-D131-4E64-B350-E3C4404867AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFCABBC-D131-4E64-B350-E3C4404867AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF985B4-5D94-4405-B946-24E45E0B79DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF985B4-5D94-4405-B946-24E45E0B79DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF985B4-5D94-4405-B946-24E45E0B79DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF985B4-5D94-4405-B946-24E45E0B79DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2423C4F-1BEF-411C-BCDF-370AE4777CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2423C4F-1BEF-411C-BCDF-370AE4777CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2423C4F-1BEF-411C-BCDF-370AE4777CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2423C4F-1BEF-411C-BCDF-370AE4777CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564EE677-77BA-4921-89B2-F873FAC22C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564EE677-77BA-4921-89B2-F873FAC22C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564EE677-77BA-4921-89B2-F873FAC22C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564EE677-77BA-4921-89B2-F873FAC22C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B33FC9E-17D9-4104-AEEC-A402D6D5874C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B33FC9E-17D9-4104-AEEC-A402D6D5874C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B33FC9E-17D9-4104-AEEC-A402D6D5874C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B33FC9E-17D9-4104-AEEC-A402D6D5874C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8CFCABBC-D131-4E64-B350-E3C4404867AE} = {32DF4157-BB16-473B-9DA7-3DFC4A4F0E3A}
+		{2CF985B4-5D94-4405-B946-24E45E0B79DF} = {F72F8AE0-1E03-4458-9879-4A29DD91EC43}
+		{C2423C4F-1BEF-411C-BCDF-370AE4777CE9} = {F72F8AE0-1E03-4458-9879-4A29DD91EC43}
+		{564EE677-77BA-4921-89B2-F873FAC22C93} = {8D90AA1A-231B-4A30-ABEF-C1D031A7F5A5}
+		{1B33FC9E-17D9-4104-AEEC-A402D6D5874C} = {8D90AA1A-231B-4A30-ABEF-C1D031A7F5A5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6C2FF39-F4C3-46F8-9660-AA780ECE358E}
+	EndGlobalSection
+EndGlobal
