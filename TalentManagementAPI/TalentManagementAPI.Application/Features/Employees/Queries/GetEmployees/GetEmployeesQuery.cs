@@ -20,8 +20,11 @@ namespace TalentManagementAPI.Application.Features.Employees.Queries.GetEmployee
     {
         //examples:
         public string EmployeeNumber { get; set; }
-
         public string EmployeeTitle { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Email { get; set; }
+
     }
 
     public class GetAllEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, PagedResponse<IEnumerable<Entity>>>

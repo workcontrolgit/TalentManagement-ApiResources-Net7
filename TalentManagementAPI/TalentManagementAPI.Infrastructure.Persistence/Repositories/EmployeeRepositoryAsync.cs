@@ -37,6 +37,9 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 
             var employeeNumber = requestParameter.EmployeeNumber;
             var employeeTitle = requestParameter.EmployeeTitle;
+            var lastName = requestParameter.LastName;
+            var firstName = requestParameter.FirstName;
+            var email = requestParameter.Email;
 
             var pageNumber = requestParameter.PageNumber;
             var pageSize = requestParameter.PageSize;
@@ -54,7 +57,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             recordsTotal = result.Count();
 
             // filter data
-            FilterByColumn(ref result, employeeNumber, employeeTitle);
+            FilterByColumn(ref result, employeeNumber, employeeTitle, lastName, firstName, email);
 
             // Count records after filter
             recordsFiltered = result.Count();
@@ -94,12 +97,12 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             return (shapeData, recordsCount);
         }
 
-        private void FilterByColumn(ref IQueryable<Employee> positions, string employeeNumber, string employeeTitle)
+        private void FilterByColumn(ref IQueryable<Employee> positions, string employeeNumber, string employeeTitle, string lastName, string firstName, string email)
         {
             if (!positions.Any())
                 return;
 
-            if (string.IsNullOrEmpty(employeeTitle) && string.IsNullOrEmpty(employeeNumber))
+            if (string.IsNullOrEmpty(employeeTitle) && string.IsNullOrEmpty(employeeNumber) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(email))
                 return;
 
             var predicate = PredicateBuilder.New<Employee>();

@@ -19,5 +19,17 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         {
             return Ok(await Mediator.Send(filter));
         }
+        /// <summary>
+        /// Support Ngx-DataTables https://medium.com/scrum-and-coke/angular-11-pagination-of-zillion-rows-45d8533538c0
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Paged")]
+        public async Task<IActionResult> Paged(PagedEmployeesQuery query)
+        {
+            return Ok(await Mediator.Send(query));
+        }
+
     }
 }
