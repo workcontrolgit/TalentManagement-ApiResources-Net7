@@ -16,8 +16,8 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 {
     public class EmployeeRepositoryAsync : GenericRepositoryAsync<Employee>, IEmployeeRepositoryAsync
     {
-        private readonly ApplicationDbContext _dbContext;
-        private readonly DbSet<Employee> _employee;
+        // private readonly ApplicationDbContext _dbContext;
+        // private readonly DbSet<Employee> _employee;
         private IDataShapeHelper<Employee> _dataShaper;
         private readonly IMockService _mockData;
 
@@ -25,8 +25,8 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             IDataShapeHelper<Employee> dataShaper,
             IMockService mockData) : base(dbContext)
         {
-            _dbContext = dbContext;
-            _employee = dbContext.Set<Employee>();
+            //_dbContext = dbContext;
+            // _employee = dbContext.Set<Employee>();
             _dataShaper = dataShaper;
             _mockData = mockData;
         }
@@ -57,7 +57,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             recordsTotal = result.Count();
 
             // filter data
-            FilterByColumn(ref result, employeeNumber, employeeTitle, lastName, firstName, email);
+            FilterByColumn(ref result, employeeTitle, lastName, firstName, email);
 
             // Count records after filter
             recordsFiltered = result.Count();
@@ -85,6 +85,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
 
+
             // retrieve data to list
             // var resultData = await result.ToListAsync();
             // Note: Bogus library does not support await for AsQueryable.
@@ -97,23 +98,30 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             return (shapeData, recordsCount);
         }
 
-        private void FilterByColumn(ref IQueryable<Employee> positions, string employeeNumber, string employeeTitle, string lastName, string firstName, string email)
+        private void FilterByColumn(ref IQueryable<Employee> employees, string employeeTitle, string lastName, string firstName, string email)
         {
-            if (!positions.Any())
+            if (!employees.Any())
                 return;
 
-            if (string.IsNullOrEmpty(employeeTitle) && string.IsNullOrEmpty(employeeNumber) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(employeeTitle) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(email))
                 return;
 
             var predicate = PredicateBuilder.New<Employee>();
 
-            if (!string.IsNullOrEmpty(employeeNumber))
-                predicate = predicate.And(p => p.EmployeeNumber.Contains(employeeNumber.Trim()));
-
             if (!string.IsNullOrEmpty(employeeTitle))
-                predicate = predicate.And(p => p.EmployeeTitle.Contains(employeeTitle.Trim()));
+                predicate = predicate.Or(p => p.EmployeeTitle.Contains(employeeTitle.Trim()));
 
-            positions = positions.Where(predicate);
+            if (!string.IsNullOrEmpty(lastName))
+                predicate = predicate.Or(p => p.LastName.Contains(lastName.Trim()));
+
+            if (!string.IsNullOrEmpty(firstName))
+                predicate = predicate.Or(p => p.FirstName.Contains(firstName.Trim()));
+
+            if (!string.IsNullOrEmpty(email))
+                predicate = predicate.Or(p => p.Email.Contains(email.Trim()));
+
+
+            employees = employees.Where(predicate);
         }
     }
 }
