@@ -18,7 +18,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Position> _positions;
-        private IDataShapeHelper<Position> _dataShaper;
+        private readonly IDataShapeHelper<Position> _dataShaper;
         private readonly IMockService _mockData;
 
         public PositionRepositoryAsync(ApplicationDbContext dbContext,

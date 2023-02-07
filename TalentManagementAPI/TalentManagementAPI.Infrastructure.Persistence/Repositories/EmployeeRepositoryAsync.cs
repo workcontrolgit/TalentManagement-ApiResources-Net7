@@ -16,35 +16,30 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 {
     public class EmployeeRepositoryAsync : GenericRepositoryAsync<Employee>, IEmployeeRepositoryAsync
     {
-        // private readonly ApplicationDbContext _dbContext;
-        // private readonly DbSet<Employee> _employee;
-        private IDataShapeHelper<Employee> _dataShaper;
+        private readonly IDataShapeHelper<Employee> _dataShaper;
         private readonly IMockService _mockData;
 
         public EmployeeRepositoryAsync(ApplicationDbContext dbContext,
             IDataShapeHelper<Employee> dataShaper,
             IMockService mockData) : base(dbContext)
         {
-            //_dbContext = dbContext;
-            // _employee = dbContext.Set<Employee>();
             _dataShaper = dataShaper;
             _mockData = mockData;
         }
 
-        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameter)
+        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameters)
         {
             IQueryable<Employee> result;
 
-            var employeeNumber = requestParameter.EmployeeNumber;
-            var employeeTitle = requestParameter.EmployeeTitle;
-            var lastName = requestParameter.LastName;
-            var firstName = requestParameter.FirstName;
-            var email = requestParameter.Email;
+            var employeeTitle = requestParameters.EmployeeTitle;
+            var lastName = requestParameters.LastName;
+            var firstName = requestParameters.FirstName;
+            var email = requestParameters.Email;
 
-            var pageNumber = requestParameter.PageNumber;
-            var pageSize = requestParameter.PageSize;
-            var orderBy = requestParameter.OrderBy;
-            var fields = requestParameter.Fields;
+            var pageNumber = requestParameters.PageNumber;
+            var pageSize = requestParameters.PageSize;
+            var orderBy = requestParameters.OrderBy;
+            var fields = requestParameters.Fields;
 
             int recordsTotal, recordsFiltered;
 
