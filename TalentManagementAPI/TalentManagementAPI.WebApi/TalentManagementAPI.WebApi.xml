@@ -11,6 +11,13 @@
             <param name="filter"></param>
             <returns></returns>
         </member>
+        <member name="M:TalentManagementAPI.WebApi.Controllers.v1.EmployeesController.Paged(TalentManagementAPI.Application.Features.Employees.Queries.GetEmployees.PagedEmployeesQuery)">
+            <summary>
+            Support Ngx-DataTables https://medium.com/scrum-and-coke/angular-11-pagination-of-zillion-rows-45d8533538c0
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
         <member name="M:TalentManagementAPI.WebApi.Controllers.v1.PositionsController.Get(TalentManagementAPI.Application.Features.Positions.Queries.GetPositions.GetPositionsQuery)">
             <summary>
             GET: api/controller

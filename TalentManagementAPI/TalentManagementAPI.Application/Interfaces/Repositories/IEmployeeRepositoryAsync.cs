@@ -8,6 +8,6 @@ namespace TalentManagementAPI.Application.Interfaces.Repositories
 {
     public interface IEmployeeRepositoryAsync : IGenericRepositoryAsync<Employee>
     {
-        Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameter);
+        Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameters);
     }
 }
