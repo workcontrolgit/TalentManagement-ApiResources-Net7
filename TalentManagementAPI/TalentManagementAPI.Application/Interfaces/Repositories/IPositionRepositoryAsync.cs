@@ -10,7 +10,7 @@ namespace TalentManagementAPI.Application.Interfaces.Repositories
     {
         Task<bool> IsUniquePositionNumberAsync(string positionNumber);
 
-        Task<bool> SeedDataAsync(int rowCount);
+        Task SeedDataAsync(int rowCount);
 
         Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedPositionReponseAsync(GetPositionsQuery requestParameters);
     }

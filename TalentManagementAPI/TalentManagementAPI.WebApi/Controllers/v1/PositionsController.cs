@@ -61,7 +61,7 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         /// <returns></returns>
         [HttpPost]
         [Route("AddMock")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> AddMock(InsertMockPositionCommand command)
         {
             return Ok(await Mediator.Send(command));

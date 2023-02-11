@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using System;
 using TalentManagementAPI.Domain.Entities;
 
 namespace TalentManagementAPI.Infrastructure.Shared.Mock
@@ -7,6 +8,7 @@ namespace TalentManagementAPI.Infrastructure.Shared.Mock
     {
         public PositionInsertBogusConfig()
         {
+            RuleFor(o => o.Id, f => Guid.NewGuid());
             RuleFor(o => o.PositionTitle, f => f.Name.JobTitle());
             RuleFor(o => o.PositionNumber, f => f.Commerce.Ean13());
             RuleFor(o => o.PositionDescription, f => f.Name.JobDescriptor());

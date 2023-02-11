@@ -36,19 +36,20 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
                 .AllAsync(p => p.PositionNumber != positionNumber);
         }
 
-        public async Task<bool> SeedDataAsync(int rowCount)
+        public async Task SeedDataAsync(int rowCount)
         {
-            foreach (Position position in _mockData.GetPositions(rowCount))
-            {
-                await this.AddAsync(position);
-            }
-            return true;
+            //foreach (Position position in _mockData.GetPositions(rowCount))
+            //{
+            //    await this.AddAsync(position);
+            //}
+            await this.BulkInsertAsync(_mockData.GetPositions(rowCount));
         }
 
         public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedPositionReponseAsync(GetPositionsQuery requestParameter)
         {
             var positionNumber = requestParameter.PositionNumber;
             var positionTitle = requestParameter.PositionTitle;
+            var positionDescription = requestParameter.PositionDescription;
 
             var pageNumber = requestParameter.PageNumber;
             var pageSize = requestParameter.PageSize;
@@ -66,7 +67,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             recordsTotal = await result.CountAsync();
 
             // filter data
-            FilterByColumn(ref result, positionNumber, positionTitle);
+            FilterByColumn(ref result, positionNumber, positionTitle, positionDescription);
 
             // Count records after filter
             recordsFiltered = await result.CountAsync();
@@ -102,12 +103,12 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             return (shapeData, recordsCount);
         }
 
-        private void FilterByColumn(ref IQueryable<Position> positions, string positionNumber, string positionTitle)
+        private void FilterByColumn(ref IQueryable<Position> positions, string positionNumber, string positionTitle, string positionDescription)
         {
             if (!positions.Any())
                 return;
 
-            if (string.IsNullOrEmpty(positionTitle) && string.IsNullOrEmpty(positionNumber))
+            if (string.IsNullOrEmpty(positionTitle) && string.IsNullOrEmpty(positionNumber) && string.IsNullOrEmpty(positionDescription))
                 return;
 
             var predicate = PredicateBuilder.New<Position>();
@@ -117,6 +118,10 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 
             if (!string.IsNullOrEmpty(positionTitle))
                 predicate = predicate.Or(p => p.PositionTitle.ToLower().Contains(positionTitle.ToLower().Trim()));
+
+            if (!string.IsNullOrEmpty(positionDescription))
+                predicate = predicate.Or(p => p.PositionDescription.ToLower().Contains(positionDescription.ToLower().Trim()));
+
 
             positions = positions.Where(predicate);
         }
