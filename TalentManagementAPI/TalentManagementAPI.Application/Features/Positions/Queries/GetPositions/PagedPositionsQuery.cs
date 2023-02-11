@@ -67,6 +67,7 @@ namespace TalentManagementAPI.Application.Features.Positions.Queries.GetPosition
                 //limit to fields in view model
                 validFilter.PositionNumber = request.Search.Value;
                 validFilter.PositionTitle = request.Search.Value;
+                validFilter.PositionDescription = request.Search.Value;
             }
             if (string.IsNullOrEmpty(validFilter.Fields))
             {

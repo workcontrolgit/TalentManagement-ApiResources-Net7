@@ -6,6 +6,7 @@ using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using TalentManagementAPI.Application.Interfaces;
 using TalentManagementAPI.Infrastructure.Persistence.Contexts;
+using EFCore.BulkExtensions;
 
 namespace TalentManagementAPI.Infrastructure.Persistence.Repository
 {
@@ -51,6 +52,13 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repository
             await _dbContext.SaveChangesAsync();
             return entity;
         }
+
+        public async Task BulkInsertAsync(IList<T> entity)
+        {
+            await _dbContext.BulkInsertAsync(entity);
+            // await _dbContext.SaveChangesAsync();
+        }
+
 
         public async Task UpdateAsync(T entity)
         {
