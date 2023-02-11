@@ -113,10 +113,10 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             var predicate = PredicateBuilder.New<Position>();
 
             if (!string.IsNullOrEmpty(positionNumber))
-                predicate = predicate.Or(p => p.PositionNumber.Contains(positionNumber.Trim()));
+                predicate = predicate.Or(p => p.PositionNumber.ToLower().Contains(positionNumber.ToLower().Trim()));
 
             if (!string.IsNullOrEmpty(positionTitle))
-                predicate = predicate.Or(p => p.PositionTitle.Contains(positionTitle.Trim()));
+                predicate = predicate.Or(p => p.PositionTitle.ToLower().Contains(positionTitle.ToLower().Trim()));
 
             positions = positions.Where(predicate);
         }

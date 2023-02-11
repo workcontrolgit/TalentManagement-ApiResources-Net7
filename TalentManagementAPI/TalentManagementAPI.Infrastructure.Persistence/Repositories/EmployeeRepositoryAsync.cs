@@ -104,16 +104,16 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             var predicate = PredicateBuilder.New<Employee>();
 
             if (!string.IsNullOrEmpty(employeeTitle))
-                predicate = predicate.Or(p => p.EmployeeTitle.Contains(employeeTitle.Trim()));
+                predicate = predicate.Or(p => p.EmployeeTitle.ToLower().Contains(employeeTitle.ToLower().Trim()));
 
             if (!string.IsNullOrEmpty(lastName))
-                predicate = predicate.Or(p => p.LastName.Contains(lastName.Trim()));
+                predicate = predicate.Or(p => p.LastName.ToLower().Contains(lastName.ToLower().Trim()));
 
             if (!string.IsNullOrEmpty(firstName))
-                predicate = predicate.Or(p => p.FirstName.Contains(firstName.Trim()));
+                predicate = predicate.Or(p => p.FirstName.ToLower().Contains(firstName.ToLower().Trim()));
 
             if (!string.IsNullOrEmpty(email))
-                predicate = predicate.Or(p => p.Email.Contains(email.Trim()));
+                predicate = predicate.Or(p => p.Email.ToLower().Contains(email.ToLower().Trim()));
 
 
             employees = employees.Where(predicate);
