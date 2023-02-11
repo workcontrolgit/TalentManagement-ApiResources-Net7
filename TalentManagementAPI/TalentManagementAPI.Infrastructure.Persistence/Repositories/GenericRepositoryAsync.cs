@@ -56,7 +56,6 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repository
         public async Task BulkInsertAsync(IList<T> entity)
         {
             await _dbContext.BulkInsertAsync(entity);
-            // await _dbContext.SaveChangesAsync();
         }
 
 
