@@ -16,7 +16,6 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 {
     public class PositionRepositoryAsync : GenericRepositoryAsync<Position>, IPositionRepositoryAsync
     {
-        private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<Position> _positions;
         private readonly IDataShapeHelper<Position> _dataShaper;
         private readonly IMockService _mockData;
@@ -24,7 +23,6 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
         public PositionRepositoryAsync(ApplicationDbContext dbContext,
             IDataShapeHelper<Position> dataShaper, IMockService mockData) : base(dbContext)
         {
-            _dbContext = dbContext;
             _positions = dbContext.Set<Position>();
             _dataShaper = dataShaper;
             _mockData = mockData;
@@ -38,10 +36,6 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
 
         public async Task SeedDataAsync(int rowCount)
         {
-            //foreach (Position position in _mockData.GetPositions(rowCount))
-            //{
-            //    await this.AddAsync(position);
-            //}
             await this.BulkInsertAsync(_mockData.GetPositions(rowCount));
         }
 
