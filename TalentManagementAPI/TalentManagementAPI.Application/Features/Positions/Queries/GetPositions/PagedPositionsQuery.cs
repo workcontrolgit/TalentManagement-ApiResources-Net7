@@ -25,13 +25,11 @@ namespace TalentManagementAPI.Application.Features.Positions.Queries.GetPosition
     public class PagePositionQueryHandler : IRequestHandler<PagedPositionsQuery, PagedDataTableResponse<IEnumerable<Entity>>>
     {
         private readonly IPositionRepositoryAsync _positionRepository;
-        private readonly IMapper _mapper;
         private readonly IModelHelper _modelHelper;
 
         public PagePositionQueryHandler(IPositionRepositoryAsync positionRepository, IMapper mapper, IModelHelper modelHelper)
         {
             _positionRepository = positionRepository;
-            _mapper = mapper;
             _modelHelper = modelHelper;
         }
 
