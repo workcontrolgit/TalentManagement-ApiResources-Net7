@@ -9,20 +9,20 @@ namespace TalentManagementAPI.Infrastructure.Shared.Services
     {
         public List<Position> GetPositions(int rowCount)
         {
-            var positionFaker = new PositionInsertBogusConfig();
-            return positionFaker.Generate(rowCount);
+            var faker = new PositionInsertBogusConfig();
+            return faker.Generate(rowCount);
         }
 
         public List<Employee> GetEmployees(int rowCount)
         {
-            var positionFaker = new EmployeeBogusConfig();
-            return positionFaker.Generate(rowCount);
+            var faker = new EmployeeBogusConfig();
+            return faker.Generate(rowCount);
         }
 
         public List<Position> SeedPositions(int rowCount)
         {
-            var seedPositionFaker = new PositionSeedBogusConfig();
-            return seedPositionFaker.Generate(rowCount);
+            var faker = new PositionSeedBogusConfig();
+            return faker.Generate(rowCount);
         }
     }
 }
