@@ -19,11 +19,28 @@ namespace TalentManagementAPI.Application.Features.Positions.Commands.UpdatePosi
         {
             private readonly IPositionRepositoryAsync _positionRepository;
 
+
+
+            /// <summary>
+            /// Constructor for UpdatePositionCommandHandler class.
+            /// </summary>
+            /// <param name="positionRepository">IPositionRepositoryAsync object</param>
+            /// <returns>
+            /// UpdatePositionCommandHandler object
+            /// </returns>
             public UpdatePositionCommandHandler(IPositionRepositoryAsync positionRepository)
             {
                 _positionRepository = positionRepository;
             }
 
+
+
+            /// <summary>
+            /// Handles the UpdatePositionCommand and updates the position in the repository.
+            /// </summary>
+            /// <param name="command">The command containing the updated position information.</param>
+            /// <param name="cancellationToken">The cancellation token.</param>
+            /// <returns>A response containing the Id of the updated position.</returns>
             public async Task<Response<Guid>> Handle(UpdatePositionCommand command, CancellationToken cancellationToken)
             {
                 var position = await _positionRepository.GetByIdAsync(command.Id);

@@ -24,6 +24,17 @@ namespace TalentManagementAPI.Application.Features.Positions.Queries.GetPosition
         private readonly IMapper _mapper;
         private readonly IModelHelper _modelHelper;
 
+
+
+        /// <summary>
+        /// Constructor for GetAllPositionsQueryHandler class.
+        /// </summary>
+        /// <param name="positionRepository">IPositionRepositoryAsync object.</param>
+        /// <param name="mapper">IMapper object.</param>
+        /// <param name="modelHelper">IModelHelper object.</param>
+        /// <returns>
+        /// GetAllPositionsQueryHandler object.
+        /// </returns>
         public GetAllPositionsQueryHandler(IPositionRepositoryAsync positionRepository, IMapper mapper, IModelHelper modelHelper)
         {
             _positionRepository = positionRepository;
@@ -31,6 +42,14 @@ namespace TalentManagementAPI.Application.Features.Positions.Queries.GetPosition
             _modelHelper = modelHelper;
         }
 
+
+
+        /// <summary>
+        /// Handles the GetPositionsQuery request and returns a PagedResponse containing the data and records count.
+        /// </summary>
+        /// <param name="request">The GetPositionsQuery request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A PagedResponse containing the data and records count.</returns>
         public async Task<PagedResponse<IEnumerable<Entity>>> Handle(GetPositionsQuery request, CancellationToken cancellationToken)
         {
 

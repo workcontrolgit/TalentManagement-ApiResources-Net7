@@ -33,6 +33,17 @@ namespace TalentManagementAPI.Application.Features.Employees.Queries.GetEmployee
         private readonly IMapper _mapper;
         private readonly IModelHelper _modelHelper;
 
+
+
+        /// <summary>
+        /// Constructor for GetAllEmployeesQueryHandler class.
+        /// </summary>
+        /// <param name="employeeRepository">IEmployeeRepositoryAsync object.</param>
+        /// <param name="mapper">IMapper object.</param>
+        /// <param name="modelHelper">IModelHelper object.</param>
+        /// <returns>
+        /// GetAllEmployeesQueryHandler object.
+        /// </returns>
         public GetAllEmployeesQueryHandler(IEmployeeRepositoryAsync employeeRepository, IMapper mapper, IModelHelper modelHelper)
         {
             _employeeRepository = employeeRepository;
@@ -40,6 +51,14 @@ namespace TalentManagementAPI.Application.Features.Employees.Queries.GetEmployee
             _modelHelper = modelHelper;
         }
 
+
+
+        /// <summary>
+        /// Handles the GetEmployeesQuery request and returns a PagedResponse containing the requested data.
+        /// </summary>
+        /// <param name="request">The GetEmployeesQuery request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A PagedResponse containing the requested data.</returns>
         public async Task<PagedResponse<IEnumerable<Entity>>> Handle(GetEmployeesQuery request, CancellationToken cancellationToken)
         {
             var validFilter = request;

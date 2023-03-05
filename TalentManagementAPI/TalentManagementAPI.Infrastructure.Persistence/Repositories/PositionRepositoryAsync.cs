@@ -20,6 +20,17 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
         private readonly IDataShapeHelper<Position> _dataShaper;
         private readonly IMockService _mockData;
 
+
+
+        /// <summary>
+        /// Constructor for PositionRepositoryAsync class. 
+        /// </summary>
+        /// <param name="dbContext">ApplicationDbContext object.</param>
+        /// <param name="dataShaper">IDataShapeHelper object.</param>
+        /// <param name="mockData">IMockService object.</param>
+        /// <returns>
+        /// PositionRepositoryAsync object.
+        /// </returns>
         public PositionRepositoryAsync(ApplicationDbContext dbContext,
             IDataShapeHelper<Position> dataShaper, IMockService mockData) : base(dbContext)
         {
@@ -28,27 +39,48 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             _mockData = mockData;
         }
 
+
+
+        /// <summary>
+        /// Checks if the given position number is unique.
+        /// </summary>
+        /// <param name="positionNumber">The position number to check.</param>
+        /// <returns>A boolean indicating if the position number is unique.</returns>
         public async Task<bool> IsUniquePositionNumberAsync(string positionNumber)
         {
             return await _positions
                 .AllAsync(p => p.PositionNumber != positionNumber);
         }
 
+
+
+        /// <summary>
+        /// Seeds the data asynchronously.
+        /// </summary>
+        /// <param name="rowCount">The row count.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task SeedDataAsync(int rowCount)
         {
             await this.BulkInsertAsync(_mockData.GetPositions(rowCount));
         }
 
-        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedPositionReponseAsync(GetPositionsQuery requestParameter)
-        {
-            var positionNumber = requestParameter.PositionNumber;
-            var positionTitle = requestParameter.PositionTitle;
-            var positionDescription = requestParameter.PositionDescription;
 
-            var pageNumber = requestParameter.PageNumber;
-            var pageSize = requestParameter.PageSize;
-            var orderBy = requestParameter.OrderBy;
-            var fields = requestParameter.Fields;
+
+        /// <summary>
+        /// Retrieves a paged response of positions based on the given query parameters.
+        /// </summary>
+        /// <param name="requestParameters">The query parameters used to filter and page the response.</param>
+        /// <returns>A tuple containing the paged response of positions and the total number of records.</returns>
+        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedPositionReponseAsync(GetPositionsQuery requestParameters)
+        {
+            var positionNumber = requestParameters.PositionNumber;
+            var positionTitle = requestParameters.PositionTitle;
+            var positionDescription = requestParameters.PositionDescription;
+
+            var pageNumber = requestParameters.PageNumber;
+            var pageSize = requestParameters.PageSize;
+            var orderBy = requestParameters.OrderBy;
+            var fields = requestParameters.Fields;
 
             int recordsTotal, recordsFiltered;
 
@@ -97,6 +129,11 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             return (shapeData, recordsCount);
         }
 
+
+
+        /// <summary>
+        /// Filters a given IQueryable by position number, title, and description.
+        /// </summary>
         private void FilterByColumn(ref IQueryable<Position> positions, string positionNumber, string positionTitle, string positionDescription)
         {
             if (!positions.Any())

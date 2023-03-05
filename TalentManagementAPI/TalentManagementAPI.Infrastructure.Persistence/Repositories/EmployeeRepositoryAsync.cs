@@ -18,6 +18,17 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
         private readonly IDataShapeHelper<Employee> _dataShaper;
         private readonly IMockService _mockData;
 
+
+
+        /// <summary>
+        /// Constructor for EmployeeRepositoryAsync class.
+        /// </summary>
+        /// <param name="dbContext">ApplicationDbContext object.</param>
+        /// <param name="dataShaper">IDataShapeHelper object.</param>
+        /// <param name="mockData">IMockService object.</param>
+        /// <returns>
+        /// 
+        /// </returns>
         public EmployeeRepositoryAsync(ApplicationDbContext dbContext,
             IDataShapeHelper<Employee> dataShaper,
             IMockService mockData) : base(dbContext)
@@ -26,6 +37,13 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             _mockData = mockData;
         }
 
+
+
+        /// <summary>
+        /// Retrieves a paged list of employees based on the provided query parameters.
+        /// </summary>
+        /// <param name="requestParameters">The query parameters used to filter and page the data.</param>
+        /// <returns>A tuple containing the paged list of employees and the total number of records.</returns>
         public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameters)
         {
             IQueryable<Employee> result;
@@ -92,6 +110,16 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
             return (shapeData, recordsCount);
         }
 
+
+
+        /// <summary>
+        /// Filters an IQueryable of employees based on the provided parameters.
+        /// </summary>
+        /// <param name="employees">The IQueryable of employees to filter.</param>
+        /// <param name="employeeTitle">The employee title to filter by.</param>
+        /// <param name="lastName">The last name to filter by.</param>
+        /// <param name="firstName">The first name to filter by.</param>
+        /// <param name="email">The email to filter by.</param>
         private void FilterByColumn(ref IQueryable<Employee> employees, string employeeTitle, string lastName, string firstName, string email)
         {
             if (!employees.Any())

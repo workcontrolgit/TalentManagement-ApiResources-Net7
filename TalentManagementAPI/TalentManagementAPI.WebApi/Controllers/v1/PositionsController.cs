@@ -17,11 +17,12 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
     [ApiVersion("1.0")]
     public class PositionsController : BaseApiController
     {
+
         /// <summary>
-        /// GET: api/controller
+        /// Gets a list of positions based on the provided filter.
         /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
+        /// <param name="filter">The filter used to query the positions.</param>
+        /// <returns>A list of positions.</returns>
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetPositionsQuery filter)
         {
@@ -29,10 +30,10 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// GET api/controller/5
+        /// Gets a position by its Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The Id of the position.</param>
+        /// <returns>The position with the specified Id.</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -40,10 +41,10 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// POST api/controller
+        /// Creates a new position.
         /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
+        /// <param name="command">The command containing the data for the new position.</param>
+        /// <returns>A 201 Created response containing the newly created position.</returns>
         [HttpPost]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -55,10 +56,10 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Bulk insert fake data by specifying number of rows
+        /// Sends an InsertMockPositionCommand to the mediator.
         /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
+        /// <param name="command">The command to be sent.</param>
+        /// <returns>The result of the command.</returns>
         [HttpPost]
         [Route("AddMock")]
         //[Authorize]
@@ -68,10 +69,10 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// Support Ngx-DataTables https://medium.com/scrum-and-coke/angular-11-pagination-of-zillion-rows-45d8533538c0
+        /// Retrieves a paged list of positions.
         /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+        /// <param name="query">The query parameters for the paged list.</param>
+        /// <returns>A paged list of positions.</returns>
         [HttpPost]
         [Route("Paged")]
         public async Task<IActionResult> Paged(PagedPositionsQuery query)
@@ -80,11 +81,11 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// PUT api/controller/5
+        /// Updates a position with the given id using the provided command.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
+        /// <param name="id">The id of the position to update.</param>
+        /// <param name="command">The command containing the updated information.</param>
+        /// <returns>The updated position.</returns>
         [HttpPut("{id}")]
         [Authorize]
         public async Task<IActionResult> Put(Guid id, UpdatePositionCommand command)
@@ -97,10 +98,10 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         }
 
         /// <summary>
-        /// DELETE api/controller/5
+        /// Deletes a position by its Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The Id of the position to delete.</param>
+        /// <returns>The result of the deletion.</returns>
         [HttpDelete("{id}")]
         [Authorize(Policy = AuthorizationConsts.ManagerPolicy)]
         public async Task<IActionResult> Delete(Guid id)

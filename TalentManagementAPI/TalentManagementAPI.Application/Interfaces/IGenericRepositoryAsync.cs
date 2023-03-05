@@ -4,6 +4,15 @@ using System.Threading.Tasks;
 
 namespace TalentManagementAPI.Application.Interfaces
 {
+
+
+    /// <summary>
+    /// Represents an interface for a generic repository with asynchronous methods.
+    /// </summary>
+    /// <typeparam name="T">The type of entity.</typeparam>
+    /// <returns>
+    /// An asynchronous repository for the specified entity type.
+    /// </returns>
     public interface IGenericRepositoryAsync<T> where T : class
     {
         Task<T> GetByIdAsync(Guid id);
