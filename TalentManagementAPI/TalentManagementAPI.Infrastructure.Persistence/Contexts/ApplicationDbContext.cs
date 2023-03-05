@@ -14,6 +14,17 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Contexts
         private readonly IDateTimeService _dateTime;
         private readonly ILoggerFactory _loggerFactory;
 
+
+
+        /// <summary>
+        /// Constructor for ApplicationDbContext
+        /// </summary>
+        /// <param name="options">Options for the DbContext</param>
+        /// <param name="dateTime">Service for getting the current date and time</param>
+        /// <param name="loggerFactory">Factory for creating loggers</param>
+        /// <returns>
+        /// An instance of ApplicationDbContext
+        /// </returns>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
             IDateTimeService dateTime,
             ILoggerFactory loggerFactory
@@ -26,6 +37,14 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Contexts
 
         public DbSet<Position> Positions { get; set; }
 
+
+
+        /// <summary>
+        /// Overrides the SaveChangesAsync method to set the Created and LastModified properties of entities.
+        /// </summary>
+        /// <returns>
+        /// A Task that represents the asynchronous operation.
+        /// </returns>
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
@@ -44,6 +63,11 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Contexts
             return base.SaveChangesAsync(cancellationToken);
         }
 
+
+
+        /// <summary>
+        /// Overrides the OnModelCreating method to seed the database with mock data. 
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             var _mockData = this.Database.GetService<IMockService>();
@@ -53,6 +77,12 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Contexts
             base.OnModelCreating(builder);
         }
 
+
+
+        /// <summary>
+        /// Configures the DbContextOptionsBuilder with a LoggerFactory.
+        /// </summary>
+        /// <param name="optionsBuilder">The DbContextOptionsBuilder to configure.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(_loggerFactory);

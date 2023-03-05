@@ -22,12 +22,30 @@ namespace TalentManagementAPI.Application.Features.Positions.Commands.CreatePosi
         private readonly IPositionRepositoryAsync _positionRepository;
         private readonly IMapper _mapper;
 
+
+
+        /// <summary>
+        /// Constructor for CreatePositionCommandHandler class.
+        /// </summary>
+        /// <param name="positionRepository">IPositionRepositoryAsync object</param>
+        /// <param name="mapper">IMapper object</param>
+        /// <returns>
+        /// CreatePositionCommandHandler object
+        /// </returns>
         public CreatePositionCommandHandler(IPositionRepositoryAsync positionRepository, IMapper mapper)
         {
             _positionRepository = positionRepository;
             _mapper = mapper;
         }
 
+
+
+        /// <summary>
+        /// Handles the CreatePositionCommand request by mapping it to a position object and adding it to the position repository.
+        /// </summary>
+        /// <param name="request">The CreatePositionCommand request.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A response containing the Id of the created position.</returns>
         public async Task<Response<Guid>> Handle(CreatePositionCommand request, CancellationToken cancellationToken)
         {
             var position = _mapper.Map<Position>(request);

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -55,9 +54,9 @@ try
         var dbContext = services.GetRequiredService<ApplicationDbContext>();
         // use context
         // For fast prototype, use dbContext.Database.EnsureCreated()
-        // dbContext.Database.EnsureCreated();
+        dbContext.Database.EnsureCreated();
         // To automate migration on startupm, dbContext.Database.Migrate();
-        dbContext.Database.Migrate();
+        // dbContext.Database.Migrate();
     }
 
 

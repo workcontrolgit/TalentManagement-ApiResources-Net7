@@ -8,6 +8,17 @@ namespace TalentManagementAPI.Application.Wrappers
         public int RecordsFiltered { get; set; }
         public int RecordsTotal { get; set; }
 
+
+
+        /// <summary>
+        /// Constructor for PagedDataTableResponse class.
+        /// </summary>
+        /// <param name="data">Data to be returned.</param>
+        /// <param name="pageNumber">Page number.</param>
+        /// <param name="recordsCount">Records count.</param>
+        /// <returns>
+        /// An instance of PagedDataTableResponse.
+        /// </returns>
         public PagedDataTableResponse(T data, int pageNumber, RecordsCount recordsCount)
         {
             this.Draw = pageNumber;
