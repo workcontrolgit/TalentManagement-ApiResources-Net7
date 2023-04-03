@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TalentManagementAPI.Application.Features.Positions.Commands.CreatePosition;
 using TalentManagementAPI.Application.Features.Positions.Commands.DeletePositionById;
@@ -35,6 +38,7 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         /// <param name="id">The Id of the position.</param>
         /// <returns>The position with the specified Id.</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> Get(Guid id)
         {
             return Ok(await Mediator.Send(new GetPositionByIdQuery { Id = id }));
@@ -74,9 +78,20 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         /// <param name="query">The query parameters for the paged list.</param>
         /// <returns>A paged list of positions.</returns>
         [HttpPost]
+        [Authorize]
         [Route("Paged")]
         public async Task<IActionResult> Paged(PagedPositionsQuery query)
         {
+            // debug 
+            var user = HttpContext?.User!;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var name = User.FindFirst("name")?.Value;
+
+            // print debug information to the console
+            Debug.WriteLine($"User ID: {userId}");
+            Debug.WriteLine($"Name: {name}");
+
+
             return Ok(await Mediator.Send(query));
         }
 
@@ -87,7 +102,7 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         /// <param name="command">The command containing the updated information.</param>
         /// <returns>The updated position.</returns>
         [HttpPut("{id}")]
-        [Authorize]
+        [Authorize(Policy = AuthorizationConsts.AdminPolicy)]
         public async Task<IActionResult> Put(Guid id, UpdatePositionCommand command)
         {
             if (id != command.Id)
@@ -103,7 +118,7 @@ namespace TalentManagementAPI.WebApi.Controllers.v1
         /// <param name="id">The Id of the position to delete.</param>
         /// <returns>The result of the deletion.</returns>
         [HttpDelete("{id}")]
-        [Authorize(Policy = AuthorizationConsts.ManagerPolicy)]
+        [Authorize(Policy = AuthorizationConsts.AdminPolicy)]
         public async Task<IActionResult> Delete(Guid id)
         {
             return Ok(await Mediator.Send(new DeletePositionByIdCommand { Id = id }));

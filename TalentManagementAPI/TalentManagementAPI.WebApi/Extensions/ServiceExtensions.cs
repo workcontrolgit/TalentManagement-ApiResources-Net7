@@ -1,6 +1,5 @@
 ﻿using IdentityModel;
-using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -111,13 +110,12 @@ namespace TalentManagementAPI.WebApi.Extensions
         }
         public static void AddJWTAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-
-            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = configuration["Sts:ServerUrl"];
-                options.RequireHttpsMetadata = false;
-            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.Authority = configuration["Sts:ServerUrl"];
+                });
         }
         public static void AddAuthorizationPolicies(this IServiceCollection services, IConfiguration configuration)
         {
