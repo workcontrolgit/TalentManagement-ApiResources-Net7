@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
+using System.Text.Json;
 using TalentManagementAPI.Application;
 using TalentManagementAPI.Infrastructure.Persistence;
 using TalentManagementAPI.Infrastructure.Persistence.Contexts;
@@ -26,7 +30,8 @@ try
     builder.Services.AddControllersExtension();
     // CORS
     builder.Services.AddCorsExtension();
-    builder.Services.AddHealthChecks();
+    builder.Services.AddHealthChecks()
+        .AddSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
     //API Security
     builder.Services.AddJWTAuthentication(builder.Configuration);
     builder.Services.AddAuthorizationPolicies(builder.Configuration);
@@ -55,7 +60,7 @@ try
         // use context
         // For fast prototype, use dbContext.Database.EnsureCreated()
         dbContext.Database.EnsureCreated();
-        // To automate migration on startupm, dbContext.Database.Migrate();
+        // To automate migration on startup, use dbContext.Database.Migrate();
         // dbContext.Database.Migrate();
     }
 
@@ -70,7 +75,26 @@ try
     app.UseAuthorization();
     app.UseSwaggerExtension();
     app.UseErrorHandlingMiddleware();
-    app.UseHealthChecks("/health");
+    //app.UseHealthChecks("/health");
+    //app.UseHealthChecks("/health", new HealthCheckOptions
+    //{
+    //    Predicate = check => check.Tags.Contains("database"),
+    //    ResponseWriter = async (context, report) =>
+    //    {
+    //        context.Response.ContentType = "application/json";
+    //        var options = new JsonSerializerOptions
+    //        {
+    //            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    //        };
+    //        var json = JsonSerializer.Serialize(new
+    //        {
+    //            status = report.Status.ToString(),
+    //            database = report.Entries["database"].Status.ToString()
+    //        }, options);
+    //        await context.Response.WriteAsync(json);
+    //    }
+    //});
+    app.MapHealthChecks("/health");
     app.MapControllers();
     app.Run();
 
