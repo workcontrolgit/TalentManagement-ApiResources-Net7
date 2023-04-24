@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
