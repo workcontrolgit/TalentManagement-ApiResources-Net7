@@ -99,7 +99,7 @@ namespace TalentManagementAPI.Application.Features.Employees.Queries.GetEmployee
                 validFilter.Fields = _modelHelper.GetModelFields<GetEmployeesViewModel>();
             }
             // query based on filter
-            var entityEmployees = await _employeeRepository.GetPagedEmployeeReponseAsync(validFilter);
+            var entityEmployees = await _employeeRepository.GetPagedEmployeeResponseAsync(validFilter);
             var data = entityEmployees.data;
             RecordsCount recordCount = entityEmployees.recordsCount;
 

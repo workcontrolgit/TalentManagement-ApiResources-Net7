@@ -44,7 +44,7 @@ namespace TalentManagementAPI.Infrastructure.Persistence.Repositories
         /// </summary>
         /// <param name="requestParameters">The query parameters used to filter and page the data.</param>
         /// <returns>A tuple containing the paged list of employees and the total number of records.</returns>
-        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameters)
+        public async Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeResponseAsync(GetEmployeesQuery requestParameters)
         {
             IQueryable<Employee> result;
 
