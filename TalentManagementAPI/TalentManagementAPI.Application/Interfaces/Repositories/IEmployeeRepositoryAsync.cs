@@ -17,6 +17,6 @@ namespace TalentManagementAPI.Application.Interfaces.Repositories
     /// </returns>
     public interface IEmployeeRepositoryAsync : IGenericRepositoryAsync<Employee>
     {
-        Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeReponseAsync(GetEmployeesQuery requestParameters);
+        Task<(IEnumerable<Entity> data, RecordsCount recordsCount)> GetPagedEmployeeResponseAsync(GetEmployeesQuery requestParameters);
     }
 }
