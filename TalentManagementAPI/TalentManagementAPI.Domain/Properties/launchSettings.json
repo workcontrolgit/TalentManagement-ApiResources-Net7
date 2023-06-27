@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TalentManagementAPI.Domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50111;http://localhost:50117"
+    }
+  }
+}
