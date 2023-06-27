@@ -58,7 +58,7 @@ try
         var dbContext = services.GetRequiredService<ApplicationDbContext>();
         // use context
         // For fast prototype, use dbContext.Database.EnsureCreated()
-        dbContext.Database.EnsureCreated();
+        // dbContext.Database.EnsureCreated();
         // To automate migration on startup, use dbContext.Database.Migrate();
         // dbContext.Database.Migrate();
     }
